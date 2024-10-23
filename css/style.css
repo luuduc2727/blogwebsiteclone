@@ -1,0 +1,503 @@
+@import url("https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed:300,400,600|Roboto:300,400,700");
+
+/* General Styles */
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #121212; /* Dark background for contrast */
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header and Footer */
+header,
+footer {
+  background-color: #121212; /* Same black as the background */
+  position: relative;
+  z-index: 1000; /* Keep above other content */
+}
+
+/* Links */
+a {
+  color: #1db954; /* Spotify green */
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s ease; /* Smooth transition */
+}
+
+a:hover {
+  color: #1ed760; /* Lighter green on hover */
+  text-decoration: none; /* No underline on hover */
+}
+
+/* Logo */
+.logo-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.logo {
+  max-width: 200px;
+}
+
+/* Navbar */
+.navbar {
+  background-color: transparent; /* Transparent navbar */
+  border-bottom: none; /* Remove border for seamless look */
+}
+
+.navbar-nav {
+  display: flex; /* Use Flexbox for alignment */
+  justify-content: space-evenly; /* Distribute space evenly between items */
+  width: 100%; /* Ensure it takes full width */
+}
+
+.navbar-brand {
+  text-decoration: none;
+}
+
+.logo-text {
+  font-family: "Barlow Semi Condensed", sans-serif; /* Choose a modern font */
+  font-size: 28px; /* Logo font size */
+  font-weight: 700; /* Bold weight for emphasis */
+  color: #1db954; /* Spotify green for brand color */
+  position: relative; /* Set position for the pseudo-element */
+  overflow: hidden; /* Ensure the hover effect is contained */
+  transition: color 0.3s; /* Smooth transition for color change */
+}
+
+.logo-text::after {
+  content: ""; /* Create a pseudo-element for the hover effect */
+  position: absolute;
+  left: 50%; /* Center it */
+  bottom: 0; /* Position it at the bottom */
+  height: 3px; /* Height of the line */
+  width: 100%; /* Full width */
+  transform: translateX(-50%); /* Center it horizontally */
+  transform: scaleX(0); /* Start with scale 0 */
+  transition: transform 0.3s; /* Animate scale on hover */
+}
+
+.logo-text:hover {
+  color: #ffffff; /* Change text color to white on hover */
+}
+
+.logo-text:hover::after {
+  transform: translateX(-50%) scaleX(1); /* Scale to full width on hover */
+}
+
+.nav-link,
+.dropdown-item {
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffffff; /* White text */
+  transition: color 0.3s, background-color 0.3s;
+  border-radius: 20px; /* Rounded edges */
+  padding: 10px 15px; /* Spacing for buttons */
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link:hover,
+.dropdown-item:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Slight highlight on hover */
+  color: #1db954; /* Spotify green on hover */
+}
+
+/* New styles for active click state */
+.nav-link:active,
+.dropdown-item:active {
+  background-color: rgba(29, 185, 84, 0.3); /* Spotify green with opacity */
+  color: #ffffff;
+  transform: scale(0.98); /* Slight scale down effect */
+  transition: background-color 0.1s, transform 0.1s;
+}
+
+/* Add a subtle ripple effect */
+.nav-link:active::after,
+.dropdown-item:active::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+  animation: ripple 0.4s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(20, 20);
+    opacity: 0;
+  }
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  background-color: rgba(30, 30, 30, 0.95); /* Dark background for dropdown */
+  border: none; /* Remove border for a cleaner look */
+  border-radius: 8px; /* Rounded corners */
+  backdrop-filter: blur(10px); /* Blur effect */
+  margin-top: 5px; /* Slight spacing from the navbar */
+  padding: 0; /* Remove padding to avoid clipping */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Add shadow for depth */
+  /* Add these properties for the transition effect */
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: block;
+  pointer-events: none;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dropdown-item {
+  color: #ffffff; /* White text for items */
+  padding: 10px 20px; /* Padding for dropdown items */
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(
+    29,
+    185,
+    84,
+    0.6
+  ); /* Light green background on hover */
+  color: #ffffff; /* Ensure text remains white on hover */
+}
+
+/* Optional: Active/Selected state for dropdown items */
+.dropdown-item.active {
+  background-color: rgba(
+    29,
+    185,
+    84,
+    0.8
+  ); /* Stronger highlight for active items */
+}
+
+/* Ensure the dropdown toggle has a pointer cursor */
+.dropdown-toggle {
+  cursor: pointer;
+}
+
+/* Dropdown Toggle Styles */
+.dropdown-toggle::after {
+  display: inline-block;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-bottom: 0;
+  border-left: 0.3em solid transparent;
+  transition: transform 0.3s ease;
+}
+
+.dropdown-toggle[aria-expanded="true"]::after {
+  transform: rotate(-180deg);
+}
+
+.dropdown-menu {
+  background-color: rgba(30, 30, 30, 0.95);
+  border: none;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  margin-top: 5px;
+  padding: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: block;
+  pointer-events: none;
+}
+
+.nav-item.active .nav-link {
+  background-color: rgba(29, 185, 84, 0.2); /* Slight green background */
+  color: #1db954; /* Spotify green text */
+  font-weight: 600;
+}
+
+/* .nav-item.active .nav-link::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #1db954; 
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  transform: scaleX(1);
+  transition: transform 0.3s ease-in-out;
+} */
+
+/* Hover effect for active item */
+.nav-item.active .nav-link:hover {
+  background-color: rgba(
+    29,
+    185,
+    84,
+    0.3
+  ); /* Slightly darker green background on hover */
+}
+
+/* Main content */
+.card {
+  background: rgba(30, 30, 30, 0.8); /* Transparent dark background */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Light border */
+  border-radius: 12px; /* Rounded corners */
+  color: #ffffff; /* White text */
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  backdrop-filter: blur(15px); /* Blur effect for a glassmorphic look */
+  padding: 20px;
+}
+
+.card-title {
+  color: #1db954; /* Spotify green color for titles */
+  font-size: 1.5rem; /* Adjust title size */
+  margin-bottom: 15px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card:hover {
+  transform: translateY(-5px) scale(1.03); /* Slightly elevate on hover */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6); /* Shadow effect on hover */
+}
+
+.card img {
+  transition: transform 0.3s, filter 0.3s;
+  border-radius: 12px; /* Rounded corners for images */
+}
+
+.card:hover img {
+  transform: scale(1.1); /* Scale up the image */
+  filter: brightness(0.8); /* Slightly darken the image */
+}
+
+/* Buttons */
+.btn {
+  background-color: transparent; /* Transparent background */
+  border: 2px solid #1db954; /* Spotify green border */
+  color: #1db954; /* Spotify green text */
+  border-radius: 20px; /* Rounded borders */
+  padding: 10px 20px; /* Padding for buttons */
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.btn:hover {
+  background-color: rgba(29, 185, 84, 0.8); /* Green background on hover */
+  color: #ffffff; /* White text on hover */
+}
+
+/* Sidebar */
+.blog-sidebar {
+  background-color: rgba(
+    40,
+    40,
+    40,
+    0.9
+  ); /* Slightly transparent dark background */
+  color: #ffffff; /* White text */
+  padding: 20px; /* Padding for the sidebar */
+  border-radius: 12px; /* Rounded corners */
+  backdrop-filter: blur(10px); /* Blur effect for a seamless look */
+  margin-bottom: 20px; /* Spacing at the bottom */
+}
+
+.blog-sidebar h2 {
+  color: #1db954; /* Spotify green color for headers */
+  font-size: 1.8rem; /* Increase header size */
+  margin-bottom: 15px; /* Space below header */
+}
+
+.blog-sidebar h4 {
+  color: #ffffff; /* White color for subheaders */
+  font-size: 1.4rem; /* Subheader size */
+  margin-top: 10px; /* Space above subheader */
+}
+
+.blog-sidebar p {
+  color: rgba(255, 255, 255, 0.8); /* Slightly lighter white for paragraphs */
+  line-height: 1.6; /* Improve readability */
+  margin-top: 10px; /* Space above paragraphs */
+}
+
+.blog-sidebar img {
+  border-radius: 50%; /* Make the profile image circular */
+  margin-bottom: 15px; /* Space below the image */
+}
+
+.form-check {
+  display: flex;
+  align-items: center; /* Center the items vertically */
+  margin-bottom: 15px; /* Spacing between options */
+}
+
+input,
+select,
+.form-check-label,
+.form-check-input {
+  background-color: transparent; /* Dark input backgrounds */
+  color: #ffffff;
+  border: none;
+  border-radius: 10px; /* Rounded borders */
+}
+
+.form-check-label {
+  color: #ffffff; /* White text for label */
+  font-size: 16px; /* Increased font size for better visibility */
+  margin-left: 10px; /* Space between input and label */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+.form-check-input {
+  appearance: none; /* Remove default styling */
+  background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Light border */
+  border-radius: 50%; /* Round for radio buttons */
+  width: 20px; /* Width of radio button */
+  height: 20px; /* Height of radio button */
+  margin-right: 10px; /* Space between radio button and label */
+  transition: background-color 0.3s, border-color 0.3s; /* Smooth transitions */
+  cursor: pointer; /* Change cursor on hover */
+}
+
+.form-check-input:checked {
+  background-color: #1db954; /* Spotify green when checked */
+  border-color: #1db954; /* Green border */
+}
+
+.form-check-input:checked::after {
+  content: ""; /* Add checkmark */
+  display: block;
+  width: 12px; /* Size of checkmark */
+  height: 12px; /* Size of checkmark */
+  border-radius: 50%; /* Round for the inner check */
+  background-color: white; /* White checkmark */
+  position: relative;
+  top: 3px; /* Adjust position */
+  left: 3px; /* Adjust position */
+}
+
+/* Checkbox styling */
+.form-check-input[type="checkbox"] {
+  appearance: none; /* Remove default styling */
+  width: 20px; /* Width of checkbox */
+  height: 20px; /* Height of checkbox */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Light border */
+  border-radius: 4px; /* Slightly rounded corners */
+  background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
+  cursor: pointer; /* Change cursor on hover */
+  margin-right: 10px; /* Space between checkbox and label */
+}
+
+.form-check-input[type="checkbox"]:checked {
+  background-color: #1db954; /* Spotify green when checked */
+  border-color: #1db954; /* Green border */
+}
+
+/* Styles for Checkbox Checkmark */
+.form-check-input[type="checkbox"]:checked::after {
+  content: ""; /* Add checkmark */
+  display: block;
+  width: 12px; /* Size of checkmark */
+  height: 12px; /* Size of checkmark */
+  background-color: white; /* White checkmark */
+  border-radius: 2px; /* Slightly round for the inner check */
+}
+
+input::placeholder,
+select {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+input:focus,
+select:focus
+  .form-check-input:focus
+  .form-check-label:focus
+  .form-control:focus {
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.2
+  ); /* Slightly darker transparent background on focus */
+  border-color: #1db954; /* Change border color to Spotify green on focus */
+  outline: none; /* Remove default outline */
+}
+
+.custom-select,
+.form-control {
+  background-color: #3e3e3e; /* Dark input backgrounds */
+  color: #ffffff;
+  border-radius: 10px; /* Rounded borders */
+}
+
+/* Footer */
+footer {
+  padding: 20px;
+}
+
+footer a {
+  color: #1db954; /* Spotify green links */
+  transition: color 0.3s;
+}
+
+footer a:hover {
+  color: #1ed760; /* Lighter green on hover */
+}
+
+footer i {
+  color: #ffffff;
+  padding: 0 12px;
+  transition: color 0.3s;
+}
+
+footer i:hover {
+  color: #1db954; /* Spotify green on hover */
+}
+
+/* Animations */
+@keyframes hoverGlow {
+  from {
+    box-shadow: 0 0 10px #1db954, 0 0 20px #1db954, 0 0 30px #1db954;
+  }
+  to {
+    box-shadow: 0 0 20px #1ed760, 0 0 30px #1ed760, 0 0 40px #1ed760;
+  }
+}
+
+.card:hover {
+  animation: hoverGlow 1s infinite alternate; /* Pulsing effect on hover */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .card-title {
+    font-size: 1.25rem; /* Adjust title size for smaller screens */
+  }
+}
