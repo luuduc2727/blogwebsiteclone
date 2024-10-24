@@ -7,7 +7,7 @@ const articlerouter = require("./routes/articles")
 const Article = require('./models/article')
 const methodOverrride = require('method-override')
 const PORT = process.env.PORT || 3000
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/luuduc'
+const MONGODB_URI = process.env.MONGODB_URI 
 const NODE_ENV = process.env.NODE_ENV
 
 app.set('view engine', 'ejs');
@@ -18,7 +18,10 @@ app.use('/css', express.static('D:/BloggingWebAppClone/css'));
 app.use(express.urlencoded({extended: false}))
 app.use(methodOverrride('_method'))
 
-mongoose.connect(MONGODB_URI)
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log('Kết nối thành công đến MongoDB Atlas!'))
+    .catch(err => console.error('Lỗi kết nối đến MongoDB:', err));
+    
 app.get('/', async(req, res) => {
 
     const article = await Article.find().sort({createAt: 'desc'})
